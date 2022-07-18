@@ -1,0 +1,3 @@
+2022-07-18 14:20:46 [ERROR] - DB error [User]
+ 	SELECT USER_ID, NM, M_PHONE, DEPT_NM, SCHYR, ADDR, GRAD_YN FROM userAuth WHERE USER_ID = ? AND PASSWD = umYgucYsY5grmqf/S1OrBggct7QdnR+7K+02oZT64BLFnHh530l0bW7mOwTOVXiX/5FFNxYjlgYuTCOmEgB05A==
+ 	Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=' at line 1

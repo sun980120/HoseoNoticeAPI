@@ -1,0 +1,17 @@
+2022-07-05 14:28:49 [ERROR] - DB error [User]
+ 	SELECT USER_ID, NM, M_PHONE, DEPT_NM, SCHYR, ADDR, GRAD_YN FROM userAuth WHERE USER_ID='20171302' AND PASSWD='umYgucYsY5grmqf/S1OrBggct7QdnR+7K+02oZT64BLFnHh530l0bW7mOwTOVXiX/5FFNxYjlgYuTCOmEgB05A=='
+ 	Error: getaddrinfo ENOTFOUND 210.119.108.237:22
+2022-07-05 14:29:20 [ERROR] - DB error [User]
+ 	SELECT USER_ID, NM, M_PHONE, DEPT_NM, SCHYR, ADDR, GRAD_YN FROM userAuth WHERE USER_ID='20171302' AND PASSWD='umYgucYsY5grmqf/S1OrBggct7QdnR+7K+02oZT64BLFnHh530l0bW7mOwTOVXiX/5FFNxYjlgYuTCOmEgB05A=='
+ 	Error: getaddrinfo ENOTFOUND 210.119.108.237:22
+2022-07-05 14:29:29 [ERROR] - DB error [User]
+ 	SELECT USER_ID, NM, M_PHONE, DEPT_NM, SCHYR, ADDR, GRAD_YN FROM userAuth WHERE USER_ID='20171302' AND PASSWD='umYgucYsY5grmqf/S1OrBggct7QdnR+7K+02oZT64BLFnHh530l0bW7mOwTOVXiX/5FFNxYjlgYuTCOmEgB05A=='
+ 	Error: getaddrinfo ENOTFOUND 210.119.108.237:22
+2022-07-05 14:30:56 [ERROR] - DB error [user]
+ 	INSERT INTO user (user_id, name, department, grade, phone,grad_yn)
+        VALUES('20171302', '홍우성', '컴퓨터공학부','3'
+        , '010-4143-1174','N') ON DUPLICATE KEY 
+        UPDATE user_id='20171302', name='홍우성',
+                department='컴퓨터공학부', grade='3', grad_yn='N',
+                phone='010-4143-1174';
+ 	Error: getaddrinfo ENOTFOUND 210.119.108.237:22
