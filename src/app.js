@@ -4,7 +4,7 @@ import session from 'express-session';
 import {errorMiddleware} from './middleware/error.middleware.js'
 import "dotenv/config"
 import {Server_Port} from './configENV.js'
-
+import cookieParser from 'cookie-parser';
 
 export default class App {
     app;
@@ -35,6 +35,7 @@ export default class App {
                 saveUninitialized: true,
             }),
         );
+        this.app.use(cookieParser());
         // this.app.use(csrf());
         // this.app.use(verifyJWT);
     }
@@ -48,7 +49,6 @@ export default class App {
     
         routes.forEach((route) => {
           router.use(route.router);
-          console.log(route)
         });
     
         this.app.use('/api', router);

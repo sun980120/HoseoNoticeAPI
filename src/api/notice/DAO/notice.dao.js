@@ -171,7 +171,8 @@ function insert_notice_file(parameters) {
         })
     })
 }
-module.exports = {
+
+export const noticeDAO = {
     noticeAll,
     noticeDetail,
     noticeWrite,
@@ -181,4 +182,4 @@ module.exports = {
     select_program_id,
     select_notice_id,
     insert_notice_file
-};
+}

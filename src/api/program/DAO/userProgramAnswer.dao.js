@@ -88,7 +88,7 @@ function selectAnswerList(parameters) {
     })
 }
 
-module.exports = {
+export const userProgramAnswerDAO = {
     checkAnswer,
     deleteUserProgramAll,
     deleteUserProgram,

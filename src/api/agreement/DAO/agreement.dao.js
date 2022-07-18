@@ -74,8 +74,7 @@ function userAgreementCheck(parameters){
     })
 }
 
-
-module.exports = {
+export const agreementDAO = {
     user_agreementInsert,
     agreementInsert,
     agreementRead,

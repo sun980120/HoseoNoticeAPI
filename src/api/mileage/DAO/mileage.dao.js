@@ -115,7 +115,7 @@ function SemesterMileage(parameters){
     })
 }
 
-module.exports = {
+export const mileageDAO = {
     selectMileage,
     insertMileage,
     mymileageApp,

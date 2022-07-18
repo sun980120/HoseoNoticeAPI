@@ -1,6 +1,6 @@
-const winston = require('winston');
-require('winston-daily-rotate-file');
-require('date-utils');
+import winston from 'winston';
+export * from 'winston-daily-rotate-file'
+export * from 'date-utils'
 
 const logger = winston.createLogger({
     level: 'debug', // 최소 레벨
@@ -19,8 +19,7 @@ const logger = winston.createLogger({
         })
     ]
 });
-
-module.exports = logger;
+export default logger
 
 /* LOGGER 적용
 * var logger = require('../config/logger');

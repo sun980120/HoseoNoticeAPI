@@ -1,11 +1,12 @@
 import * as express from "express";
 import { Router } from 'express'
 import { noticeCtrl } from './notice.controller.js'
-// import { verifyJWT } from '../../middlewares/auth.middleware'
-// import { Controller } from '../../common/interfaces/controller.interface'
 import wrap from '../../modules/request.handler.js';
+import {uploads} from'../../modules/index.js'
+import {studentVerifyJWT} from "../../middleware/auth.middleware.js";
+import {adminVerifyJWT} from "../../middleware/admin.middleware.js";
 
-export default class NoticeRoutes {
+export class NoticeRoutes {
     path = '/notice';
     router = Router();
 
@@ -16,18 +17,18 @@ export default class NoticeRoutes {
         const router = Router();
         router
             /* Admin-WEB Back-End*/
-            .get('/all', noticeCtrl.noticeMain)
-            .get('/all/detail', noticeCtrl.noticeDetailweb)
-            .get('/all_watch', noticeCtrl.noticeWatch)
-            .delete('/delete', noticeCtrl.noticeDelete)
+            .get('/all', adminVerifyJWT, wrap(noticeCtrl.noticeMain))
+            .get('/all/detail', adminVerifyJWT, wrap(noticeCtrl.noticeDetailweb))
+            .get('/all-watch', adminVerifyJWT, wrap(noticeCtrl.noticeWatch))
+            .delete('/delete', adminVerifyJWT, wrap(noticeCtrl.noticeDelete))
             .get('/write', function(req ,res ,next) {
                 res.render('fileupload');
             })
-            .post('/write', multer.uploads.array('FILE'), noticeCtrl.noticeWrite)
+            .post('/write', adminVerifyJWT, uploads.array('FILE'), wrap(noticeCtrl.noticeWrite))
             /* APP Back-End */
-            .get('/all_app', noticeCtrl.noticeMainApp)
-            .get('/all_app/detail', noticeCtrl.noticeDetailApp)
-            .get('/download', noticeCtrl.downloadFile)
+            .get('/app-all', studentVerifyJWT, wrap(noticeCtrl.noticeMainApp))
+            .get('/app-all/detail', studentVerifyJWT, wrap(noticeCtrl.noticeDetailApp))
+            .get('/download', wrap(noticeCtrl.downloadFile))
         this.router.use(this.path, router);
     }
 }

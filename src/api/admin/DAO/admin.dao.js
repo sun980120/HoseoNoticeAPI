@@ -35,7 +35,7 @@ function adminLevelUpdate(parameters) {
     })
 }
 
-module.exports ={
+export const adminDAO = {
     adminAll,
     adminLevelUpdate,
 }

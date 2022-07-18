@@ -140,7 +140,8 @@ function selectProgram(parameters){
         })
     })
 }
-module.exports ={
+
+export const programDAO = {
     programAll,
     myprogramAll,
     checkProgram,

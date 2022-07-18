@@ -40,7 +40,8 @@ function insertApplyDepartment(program_id, data){
         })
     })
 }
-module.exports ={
+
+export const applyDepartmentDAO = {
     checkApplyDepartment,
     insertApplyDepartment
 }

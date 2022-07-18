@@ -1,8 +1,8 @@
 'use strict';
 
-const mysql = require("mysql");
+import mysql from "mysql";
+// require('dotenv').config({ path : ".env" });
 
-require('dotenv').config({ path : ".env" });
 const db = mysql.createPool({
     host: process.env.DB_host,
     port: process.env.DB_port,
@@ -23,4 +23,4 @@ function handleDisconnect (client){
         conn.connect();
     });
 };
-module.exports =  db;
+export default db

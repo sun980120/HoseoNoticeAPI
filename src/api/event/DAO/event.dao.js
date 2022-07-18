@@ -161,7 +161,7 @@ function eventDelete(parameters) {
     })
 }
 
-module.exports = {
+export const eventDAO = {
     eventAll,
     eventMain,
     eventDelete,

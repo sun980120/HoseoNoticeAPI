@@ -9,6 +9,6 @@ async function qnaAll(){
     return data;
 }
 
-module.exports ={
+export const qnaDAO ={
     qnaAll,
 }

@@ -197,7 +197,7 @@ function selectDeviceToken(parameters){
     })
 }
 
-module.exports = {
+export const authDAO = {
     insertUser,
     insertJWT,
     checkUser,

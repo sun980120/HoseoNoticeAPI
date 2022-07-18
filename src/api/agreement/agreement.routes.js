@@ -4,8 +4,9 @@ import { agreementCtrl } from './agreement.controller.js'
 // import { verifyJWT } from '../../middlewares/auth.middleware'
 // import { Controller } from '../../common/interfaces/controller.interface'
 import wrap from '../../modules/request.handler.js';
+import {adminVerifyJWT} from "../../middleware/admin.middleware.js";
 
-export default class AgreementRoutes {
+export class AgreementRoutes {
     path = '/agreement';
     router = Router();
 
@@ -19,7 +20,7 @@ export default class AgreementRoutes {
                 res.render('agreement', { title: 'agreement' });
             })
             .get('/read_one', wrap(agreementCtrl.read_agreement))
-            .post('/write', wrap(agreementCtrl.make_agreement))
+            .post('/write',adminVerifyJWT, wrap(agreementCtrl.make_agreement))
         this.router.use(this.path, router);
     }
 }

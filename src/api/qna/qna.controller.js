@@ -1,6 +1,6 @@
 'use strict';
 
-import qnaDAO from './DAO/qna.dao.js'
+import {qnaDAO} from './DAO/qna.dao.js'
 
 export const qnaCtrl = {
     async qnaMain(req, res, next) {

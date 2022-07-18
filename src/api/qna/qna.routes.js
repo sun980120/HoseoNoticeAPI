@@ -5,7 +5,7 @@ import { Router } from 'express'
 import wrap from '../../modules/request.handler.js';
 import {qnaCtrl} from "./qna.controller.js";
 
-export default class QnaRoutes {
+export class QnaRoutes {
     path = '/qna';
     router = Router();
 
