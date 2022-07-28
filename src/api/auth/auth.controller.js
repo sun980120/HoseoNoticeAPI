@@ -54,6 +54,8 @@ export const authCtrl = {
         if (result.SCHYR != '') parameters.GRAD_YN = result.GRAD_YN;
         else parameters.GRAD_YN = "N";
 
+        if (parameters.SCHYR == "교직원") throw new BadRequestException("교직원은 접근할수 없습니다.");
+
         await authDAO.insertUser(parameters).catch(e => {
             throw new BadRequestException(e)
         })

@@ -1,6 +1,6 @@
 node_modules/
 .env
-common/
-middleware/
-modules/
 hoseo-notice-firebase-adminsdk-oi7j5-c873f8a265.json
+yarn.lock
+.eslintrc.json
+.prettierrc

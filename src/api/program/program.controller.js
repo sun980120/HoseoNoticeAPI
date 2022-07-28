@@ -1,7 +1,7 @@
 'use strict';
 
 import {programDAO} from './DAO/program.dao.js'
-import {noticeDAO} from '../notice/DAO/notice.dao.js'
+import {noticeDao} from '../notice/DAO/notice.dao.js'
 import {userProgramAnswerDAO} from './DAO/userProgramAnswer.dao.js'
 import {applyDepartmentDAO} from './DAO/applyDepartment.dao.js'
 import dayjs from 'dayjs';
@@ -30,7 +30,7 @@ export const programCtrl = {
             throw new BadRequestException(e)
         });
         parameters.user_id = permission.STUDENT_ID;
-        const program_id_data = await noticeDAO.select_program_id().catch(e => {
+        const program_id_data = await noticeDao.select_program_id().catch(e => {
             throw new BadRequestException(e)
         });
         let sendData = []

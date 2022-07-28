@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node ./src/bin/www.js",
-    "dev": "nodemon ./src/bin/www.js"
+    "dev": "nodemon ./src/bin/www.js",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
@@ -16,6 +18,9 @@
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
     "ejs": "~2.6.1",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "express": "~4.16.1",
     "express-session": "^1.17.3",
     "firebase-admin": "^11.0.0",
@@ -34,6 +39,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.16",
     "pbkdf2-password": "^1.2.1",
+    "prettier": "^2.7.1",
     "winston": "^3.7.2",
     "winston-daily-rotate-file": "^4.7.1"
   }

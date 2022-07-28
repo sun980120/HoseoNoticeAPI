@@ -58,8 +58,9 @@ function agreementRead(){
     })
 }
 function userAgreementCheck(parameters){
+    console.log(parameters)
     return new Promise(function (resolve, reject){
-        let queryData = `SELECT * FROM user_agreement WHERE user_id = ? AND agreement_id = ?`;
+        let queryData = `SELECT * FROM user_agreement WHERE user_id = ? and agreement_id = ?`;
         db.query(queryData, [parameters.user_id, parameters.agreement_id], function (error,db_data){
             if(error) {
                 logger.error(
@@ -68,6 +69,7 @@ function userAgreementCheck(parameters){
                     "\n \t" + error);
                 reject('DB ERR');
             }
+            console.log(db_data)
             if(db_data[0] === undefined) resolve('동의가능')
             else reject('이미 동의하였습니다.')
         })

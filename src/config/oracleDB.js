@@ -85,7 +85,7 @@ function userCheck(parameters) {
 function authLogin(parameters) {
     return new Promise(function (resolve, reject) {
         try {
-            const queryData = `SELECT USER_ID, NM, M_PHONE, DEPT_NM, SCHYR, ADDR, GRAD_YN FROM SW_USER_1 WHERE USER_ID = ? AND PASSWD = ?`;
+            const queryData = `SELECT * FROM SW_USER_1 WHERE USER_ID = ? AND PASSWD = ?`;
             conn.query(queryData, [parameters.user_id, parameters.pwd], function (error, db_data) {
                 if (error) {
                     logger.error(
@@ -95,7 +95,6 @@ function authLogin(parameters) {
                     );
                     reject('DB ERR');
                 }
-                console.log(db_data)
                 if (db_data[0] !== undefined) resolve(db_data[0]);
                 else reject("학번 혹은 비밀번호를 다시 확인하세요.")
             })

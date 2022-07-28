@@ -1,9 +1,9 @@
-import express from 'express'
-import {Router} from "express";
+import express from 'express';
+import { Router } from 'express';
 import session from 'express-session';
-import {errorMiddleware} from './middleware/error.middleware.js'
-import "dotenv/config"
-import {Server_Port} from './configENV.js'
+import { errorMiddleware } from './middleware/error.middleware.js';
+import 'dotenv/config';
+import { Server_Port } from './configENV.js';
 import cookieParser from 'cookie-parser';
 
 export default class App {
@@ -16,15 +16,18 @@ export default class App {
         this.initializeControllers(routes);
         this.initializeErrorHandling();
     }
+
     listen() {
         this.app.listen(Server_Port, () => {
             // console.log("DB CONNECTION SUCCESS")
             console.log(`SERVER RUN TO ${Server_Port}`);
-        })
+        });
     }
+
     getServer() {
         return this.app;
     }
+
     initializeMiddlewares() {
         this.app.use(express.json());
         this.app.use(
@@ -39,18 +42,20 @@ export default class App {
         // this.app.use(csrf());
         // this.app.use(verifyJWT);
     }
-    initializeErrorHandling() { 
+
+    initializeErrorHandling() {
         this.app.use(errorMiddleware);
     }
+
     initializeControllers(routes) {
         const router = Router();
-    
+
         router.get('/', (req, res) => res.send('OK'));
-    
+
         routes.forEach((route) => {
-          router.use(route.router);
+            router.use(route.router);
         });
-    
+
         this.app.use('/api', router);
-      }
+    }
 }

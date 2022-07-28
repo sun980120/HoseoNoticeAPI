@@ -16,19 +16,8 @@ export class NoticeRoutes {
     initializeRoutes() {
         const router = Router();
         router
-            /* Admin-WEB Back-End*/
-            .get('/all', adminVerifyJWT, wrap(noticeCtrl.noticeMain))
-            .get('/all/detail', adminVerifyJWT, wrap(noticeCtrl.noticeDetailweb))
-            .get('/all-watch', adminVerifyJWT, wrap(noticeCtrl.noticeWatch))
-            .delete('/delete', adminVerifyJWT, wrap(noticeCtrl.noticeDelete))
-            .get('/write', function(req ,res ,next) {
-                res.render('fileupload');
-            })
-            .post('/write', adminVerifyJWT, uploads.array('FILE'), wrap(noticeCtrl.noticeWrite))
-            /* APP Back-End */
-            .get('/app-all', studentVerifyJWT, wrap(noticeCtrl.noticeMainApp))
-            .get('/app-all/detail', studentVerifyJWT, wrap(noticeCtrl.noticeDetailApp))
-            .get('/download', wrap(noticeCtrl.downloadFile))
+            //APP
+            .get('/all-app', studentVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp))
         this.router.use(this.path, router);
     }
 }

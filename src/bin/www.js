@@ -9,7 +9,8 @@ import {
     MileageRoutes,
     NoticeRoutes,
     ProgramRoutes,
-    QnaRoutes
+    QnaRoutes,
+    GroupRoutes
 } from '../api/index.js'
 
 async function startServer(){
@@ -22,7 +23,8 @@ async function startServer(){
         new MileageRoutes(),
         new NoticeRoutes(),
         new ProgramRoutes(),
-        new QnaRoutes()
+        new QnaRoutes(),
+        new GroupRoutes()
     ])
     app.listen()
 }
