@@ -2,7 +2,7 @@
 
 import {programDAO} from '../program/DAO/program.dao.js'
 import {userProgramAnswerDAO} from '../program/DAO/userProgramAnswer.dao.js'
-import {mileageDAO} from '../mileage/DAO/mileage.dao.js'
+import {mileageDAO} from './/DAO/mileage.dao.js'
 import dayjs from 'dayjs'
 import {
     jwtMiddleware,

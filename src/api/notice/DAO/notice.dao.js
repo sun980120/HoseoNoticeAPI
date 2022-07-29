@@ -21,5 +21,20 @@ export const noticeDao = {
         return new Promise((resolve, reject)=>{
             const queryData = `SELECT`
         })
+    },
+    detailNotice(parameter){
+        return new Promise((resolve, reject)=>{
+            const queryData = `SELECT n.title, n.content,n.create_time, nf.file_name FROM notice AS n RIGHT JOIN notice_file AS nf ON n.notice_id = nf.notice_id WHERE n.group_id = ? AND n.notice_id = ?`;
+            db.query(queryData, [parameter.group_id, parameter.notice_id], (error, db_data)=>{
+                if (error) {
+                    logger.error(
+                        "DB error [notice & notice_file]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve(db_data[0])
+            })
+        })
     }
 }

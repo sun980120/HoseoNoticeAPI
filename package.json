@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./src/bin/www.js",
-    "dev": "nodemon ./src/bin/www.js",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "dev": "nodemon ./src/bin/www.js"
   },
   "dependencies": {
     "body-parser": "^1.20.0",

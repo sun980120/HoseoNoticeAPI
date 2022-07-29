@@ -21,8 +21,15 @@ export const noticeCtrl = {
             });
         }
     },
-    async allNotice(req) {
-
+    async detailNotice(req){
+        let parameter = {
+            'group_id': req.body.group_id,
+            'notice_id': req.params.notice_id
+        };
+        const result = await noticeDao.detailNotice(parameter).catch(e=>{
+            throw new BadRequestException(e)
+        })
+        return result
     },
     async downloadFile(req, res) {
         let parameter = {

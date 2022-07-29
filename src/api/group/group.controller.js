@@ -6,36 +6,36 @@ import { groupDao } from './DAO/group.dao.js';
 export const groupController = {
     async getMyGroup(req) {
         let jwt_token = req.header('jwt_token');
-        let permission = await resultJwt(jwt_token);
-        const result = await userGroupDao.selectUserGroup(permission).catch(e => {
+        let parameter = await resultJwt(jwt_token);
+        const result = await userGroupDao.selectUserGroup(parameter).catch(e => {
             throw new BadRequestException(e);
         });
         return result;
     },
     async addGroup(req) {
         let jwt_token = req.header('jwt_token');
-        let permission = await resultJwt(jwt_token);
-        permission.group_id = req.body.group_id;
-        await userGroupDao.duplicateGroup(permission).catch(e => {
+        let parameter = await resultJwt(jwt_token);
+        parameter.group_id = req.body.group_id;
+        await userGroupDao.duplicateGroup(parameter).catch(e => {
             throw new BadRequestException(e);
         });
-        const result = await userGroupDao.addGroup(permission).catch(e => {
+        const result = await userGroupDao.addGroup(parameter).catch(e => {
             throw new BadRequestException(e);
         });
         return result;
     },
     async deleteMyGroup(req) {
         let jwt_token = req.header('jwt_token');
-        let permission = await resultJwt(jwt_token);
-        permission.group_id = req.body.group_id;
-        const result = await userGroupDao.deleteMyGroup(permission).catch(e => {
+        let parameter = await resultJwt(jwt_token);
+        parameter.group_id = req.body.group_id;
+        const result = await userGroupDao.deleteMyGroup(parameter).catch(e => {
             throw new BadRequestException(e);
         });
         return result;
     },
     async allGroup(req) {
         let jwt_token = req.header('jwt_token');
-        let permission = await resultJwt(jwt_token);
+        let parameter = await resultJwt(jwt_token);
         const db_data = await groupDao.allGroup().catch(e => {
             throw new BadRequestException(e);
         });

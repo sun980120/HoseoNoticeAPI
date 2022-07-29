@@ -18,6 +18,7 @@ export class NoticeRoutes {
         router
             //APP
             .get('/all-app', studentVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp))
+            .get('/detail/:id', studentVerifyJWT, wrap(noticeCtrl.detailNotice))
         this.router.use(this.path, router);
     }
 }

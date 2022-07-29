@@ -1,5 +1,5 @@
-import App from '../app.js'
-import "dotenv/config"
+import App from '../app.js';
+import 'dotenv/config';
 
 import {
     AdminRoutes,
@@ -10,10 +10,10 @@ import {
     NoticeRoutes,
     ProgramRoutes,
     QnaRoutes,
-    GroupRoutes
-} from '../api/index.js'
+    GroupRoutes, PushRoutes,
+} from '../api/index.js';
 
-async function startServer(){
+async function startServer() {
     // await createConnection(connection).catch(err=>{ console.log("Catched err", err);})
     const app = new App([
         new AdminRoutes(),
@@ -24,8 +24,10 @@ async function startServer(){
         new NoticeRoutes(),
         new ProgramRoutes(),
         new QnaRoutes(),
-        new GroupRoutes()
-    ])
-    app.listen()
+        new GroupRoutes(),
+        new PushRoutes(),
+    ]);
+    app.listen();
 }
-startServer().catch((err)=> console.log(err))
+
+startServer().catch((err) => console.log(err));
