@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node ./src/bin/www.js",
-    "dev": "nodemon ./src/bin/www.js"
+    "dev": "nodemon ./src/bin/www.js",
+    "build:server": "babel src -d build"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
@@ -40,5 +41,8 @@
     "prettier": "^2.7.1",
     "winston": "^3.7.2",
     "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10"
   }
 }

@@ -18,7 +18,7 @@ export class NoticeRoutes {
         router
             //APP
             .get('/all-app', studentVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp))
-            .get('/detail/:id', studentVerifyJWT, wrap(noticeCtrl.detailNotice))
+            .get('/detail/:id', studentVerifyJWT, wrap(noticeCtrl.detailNotice))    // :id <- 그룹의 공지사항 id
         this.router.use(this.path, router);
     }
 }
