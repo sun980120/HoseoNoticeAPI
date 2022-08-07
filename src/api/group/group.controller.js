@@ -4,7 +4,7 @@ import { userGroupDao } from './DAO/userGroup.dao.js';
 import { groupDao } from './DAO/group.dao.js';
 
 export const groupController = {
-    async getMyGroup(req) {     // 사용자 그룹 목록
+    async getMyGroup(req) {     // 사용자, 관리자 그룹 목록
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         const result = await userGroupDao.selectUserGroup(parameter).catch(e => {
@@ -50,7 +50,7 @@ export const groupController = {
         }
         return result;
     },
-    async createGroup(req){
+    async createGroup(req){     // 관리자 그룹 생성
         const { group_name, group_image, intro } = req.body;
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
