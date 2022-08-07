@@ -50,4 +50,19 @@ export const groupController = {
         }
         return result;
     },
+    async createGroup(req){
+        const { group_name, group_image, intro } = req.body;
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token);
+        parameter.group_name = group_name;
+        parameter.group_image = group_image;
+        parameter.intro = intro;
+        await groupDao.nameDuplicate(parameter).catch(e=>{
+            throw new BadRequestException(e);
+        })
+        const result =  await groupDao.createGroup(parameter).catch(e => {
+            throw new BadRequestException(e);
+        })
+        return result
+    }
 };
