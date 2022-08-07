@@ -19,7 +19,7 @@ export default class App {
 
     listen() {
         this.app.listen(Server_Port, () => {
-            // console.log("DB CONNECTION SUCCESS")
+            console.log("DB CONNECTION SUCCESS")
             console.log(`SERVER RUN TO ${Server_Port}`);
         });
     }
@@ -50,7 +50,7 @@ export default class App {
     initializeControllers(routes) {
         const router = Router();
 
-        router.get('/', (req, res) => res.send('OK'));
+        router.get('/', (req, res) => res.send('Sever Is Running !!!'));
 
         routes.forEach((route) => {
             router.use(route.router);

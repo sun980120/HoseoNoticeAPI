@@ -33,7 +33,7 @@ export const groupController = {
         });
         return result;
     },
-    async allGroup(req) {
+    async allGroupList(req) {
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         const db_data = await groupDao.allGroup().catch(e => {
@@ -49,5 +49,5 @@ export const groupController = {
             });
         }
         return result;
-    }
+    },
 };

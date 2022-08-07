@@ -17,11 +17,11 @@ export const noticeDao = {
             })
         })
     },
-    downloadCount(parameter){
-        return new Promise((resolve, reject)=>{
-            const queryData = `SELECT`
-        })
-    },
+    // downloadCount(parameter){
+    //     return new Promise((resolve, reject)=>{
+    //         const queryData = `SELECT`
+    //     })
+    // },
     detailNotice(parameter){
         return new Promise((resolve, reject)=>{
             const queryData = `SELECT n.title, n.content,n.create_time, nf.file_name FROM notice AS n RIGHT JOIN notice_file AS nf ON n.notice_id = nf.notice_id WHERE n.group_id = ? AND n.notice_id = ?`;

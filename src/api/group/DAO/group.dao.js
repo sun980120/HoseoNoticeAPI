@@ -16,5 +16,10 @@ export const groupDao = {
                 resolve(db_data)
             })
         })
+    },
+    createGroup(){
+        return new Promise((resolve, reject)=>{
+            // const queryData = `INSERT INTO univ_group (group_name, intro, group_image, user_id) VALUES ('${}')`
+        })
     }
 }
