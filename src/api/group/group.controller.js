@@ -4,7 +4,7 @@ import { userGroupDao } from './DAO/userGroup.dao.js';
 import { groupDao } from './DAO/group.dao.js';
 
 export const groupController = {
-    async getMyGroup(req) {
+    async getMyGroup(req) {     // 사용자 그룹 목록
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         const result = await userGroupDao.selectUserGroup(parameter).catch(e => {
@@ -12,7 +12,7 @@ export const groupController = {
         });
         return result;
     },
-    async addGroup(req) {
+    async addGroup(req) {       // 사용자 그룹 추가
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         parameter.group_id = req.body.group_id;
@@ -24,7 +24,7 @@ export const groupController = {
         });
         return result;
     },
-    async deleteMyGroup(req) {
+    async deleteMyGroup(req) {  // 사용자 그룹 제거
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         parameter.group_id = req.body.group_id;
@@ -33,7 +33,7 @@ export const groupController = {
         });
         return result;
     },
-    async allGroupList(req) {
+    async allGroupList(req) {   // 사용자, 관리자 모든 그룹 목록
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         const db_data = await groupDao.allGroup().catch(e => {
