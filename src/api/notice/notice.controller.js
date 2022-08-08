@@ -21,13 +21,12 @@ export const noticeCtrl = {
                 notice_id: i.notice_id,
                 title: i.title,
                 create_time: i.create_time,
-                file_count: file_count //파일다운횟수 ???
+                file_count: file_count // 파일의 갯수
             });
         }
         return result;
     },
     async detailNotice(req){
-        console.log(req.params)
         let parameter = {
             'group_id': req.body.group_id,
             'notice_id': req.query.notice_id
@@ -72,6 +71,6 @@ export const noticeCtrl = {
                 throw new BadRequestException(e)
             })
         }
-        return '공지사항 추가 완료했습니다'
+        return '공지사항 추가를 완료했습니다.'
     }
 };

@@ -17,10 +17,10 @@ export class NoticeRoutes {
         const router = Router();
         router
             // WEB
-            .get('/write', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.writeNotice))
+            .get('/write', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.writeNotice))  // 그룹에 공지사항 작성
             // APP
-            .get('/all-app', studentVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp))
-            .get('/detail', studentVerifyJWT, wrap(noticeCtrl.detailNotice))    // :id <- 그룹의 공지사항 id
+            .get('/all-app', studentVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp))  // 그룹의 모든 공지사항
+            .get('/detail', studentVerifyJWT, wrap(noticeCtrl.detailNotice))        // 그룹의 공지사항 상세보기
         this.router.use(this.path, router);
     }
 }

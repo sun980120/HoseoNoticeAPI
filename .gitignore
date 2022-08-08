@@ -6,3 +6,4 @@ yarn.lock
 .prettierrc
 package-lock.json
 src/public/uploads/
+log/
