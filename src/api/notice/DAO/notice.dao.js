@@ -37,13 +37,28 @@ export const noticeDao = {
     //         const queryData = `SELECT`
     //     })
     // },
+    detailNoticeFile(parameter){
+      return new Promise((resolve, reject)=>{
+          const queryData = `SELECT file_name FROM notice_file WHERE notice_id = ?`;
+          db.query(queryData, [parameter.notice_id], (error, db_data)=>{
+              if (error) {
+                  logger.error(
+                      "DB error [notice]" +
+                      "\n \t" + queryData +
+                      "\n \t" + error);
+                  reject('DB ERR');
+              }
+              resolve(db_data)
+          })
+      })
+    },
     detailNotice(parameter){
         return new Promise((resolve, reject)=>{
-            const queryData = `SELECT n.title, n.content,n.create_time, nf.file_name FROM notice AS n RIGHT JOIN notice_file AS nf ON n.notice_id = nf.notice_id WHERE n.group_id = ? AND n.notice_id = ?`;
+            const queryData = `SELECT title, content, create_time FROM notice WHERE group_id = ? AND notice_id=?`;
             db.query(queryData, [parameter.group_id, parameter.notice_id], (error, db_data)=>{
                 if (error) {
                     logger.error(
-                        "DB error [notice & notice_file]" +
+                        "DB error [notice]" +
                         "\n \t" + queryData +
                         "\n \t" + error);
                     reject('DB ERR');
@@ -69,9 +84,10 @@ export const noticeDao = {
         })
     },
     insertFile(parameter, file) {
+        console.log(file)
         return new Promise((resolve, reject)=>{
             const queryData = `INSERT INTO notice_file (notice_id, file_orgn_name, file_name, file_path, file_create_time) VALUES (?,?,?,?,?)`;
-            db.query(queryData, [parameter.notice_id, file.originalname, file.file_name, file.path, parameter.create_time], (error, db_data)=>{
+            db.query(queryData, [parameter.notice_id, file.originalname, file.filename, file.path, parameter.create_time], (error, db_data)=>{
                 if (error) {
                     logger.error(
                         "DB error [notice_file]" +

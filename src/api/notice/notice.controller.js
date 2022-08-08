@@ -27,13 +27,23 @@ export const noticeCtrl = {
         return result;
     },
     async detailNotice(req){
+        console.log(req.params)
         let parameter = {
             'group_id': req.body.group_id,
-            'notice_id': req.params.notice_id
+            'notice_id': req.query.notice_id
         };
-        const result = await noticeDao.detailNotice(parameter).catch(e=>{
+        let result = await noticeDao.detailNotice(parameter).catch(e=>{
             throw new BadRequestException(e)
         })
+        let filename = await noticeDao.detailNoticeFile(parameter).catch(e=>{
+            throw new BadRequestException(e)
+        })
+        console.log(result)
+        let file_name = []
+        for(var i of filename){
+            file_name.push(i.file_name)
+        }
+        result.file_name = file_name
         return result
     },
     async downloadFile(req, res) {
