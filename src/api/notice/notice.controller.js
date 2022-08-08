@@ -2,6 +2,7 @@ import { noticeDao } from './DAO/notice.dao.js';
 import { BadRequestException } from '../../common/exceptions/index.js';
 import path from 'path';
 import fs from 'fs';
+import dayjs from 'dayjs';
 
 export const noticeCtrl = {
     async allGroupNoticeApp(req) {
@@ -13,13 +14,17 @@ export const noticeCtrl = {
         });
         let result = [];
         for (const i of db_data) {
+            let file_count = await noticeDao.selectFile(i.notice_id).catch(e=>{
+                throw new BadRequestException(e)
+            })
             result.push({
                 notice_id: i.notice_id,
                 title: i.title,
                 create_time: i.create_time,
-                // file_count: i.file_count, //파일다운횟수 ???
+                file_count: file_count //파일다운횟수 ???
             });
         }
+        return result;
     },
     async detailNotice(req){
         let parameter = {
@@ -42,4 +47,21 @@ export const noticeCtrl = {
         // })
         filestream.pipe(res);
     },
+    async writeNotice(req) {
+        console.log('파일업로드를 완료했습니다.')
+        let create_time = new dayjs().format('YYYY-MM-DD HH:mm:ss');
+        const {title, content, group_id} = req.body;
+        let parameter = {
+            title, content, create_time, group_id
+        }
+        parameter.notice_id = await noticeDao.createNotice(parameter).catch(e=>{
+            throw new BadRequestException(e)
+        })
+        for(var i of req.files){
+            await noticeDao.insertFile(parameter, i).catch(e=>{
+                throw new BadRequestException(e)
+            })
+        }
+        return '공지사항 추가 완료했습니다'
+    }
 };
