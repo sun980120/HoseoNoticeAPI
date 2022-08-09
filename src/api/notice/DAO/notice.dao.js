@@ -84,7 +84,6 @@ export const noticeDao = {
         })
     },
     insertFile(parameter, file) {
-        console.log(file)
         return new Promise((resolve, reject)=>{
             const queryData = `INSERT INTO notice_file (notice_id, file_orgn_name, file_name, file_path, file_create_time) VALUES (?,?,?,?,?)`;
             db.query(queryData, [parameter.notice_id, file.originalname, file.filename, file.path, parameter.create_time], (error, db_data)=>{
@@ -96,6 +95,24 @@ export const noticeDao = {
                     reject('DB ERR');
                 }
                 resolve('공지사항 파일 추가 완료')
+            })
+        })
+    },
+    pushMessageDT(group_id){
+        return new Promise((resolve, reject)=>{
+            const queryData = `SELECT u.device_token 
+            FROM user AS u 
+            RIGHT JOIN user_group AS ug ON u.user_id = ug.user_id
+            WHERE ug.group_id = ?`;
+            db.query(queryData, [group_id], (error, db_data)=>{
+                if (error) {
+                    logger.error(
+                        "DB error [user & user_group]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve(db_data)
             })
         })
     }

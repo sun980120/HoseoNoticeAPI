@@ -1,6 +1,6 @@
 import multer from 'multer' // 1
 import fs from 'fs';
-fs.readdir("uploads", (error) => {
+fs.readdir("src/public/uploads", (error) => {
     if (error) {
         console.error("uploads폴더가 없어 uploads폴더를 생성합니다.");
         fs.mkdirSync('src/public/uploads');

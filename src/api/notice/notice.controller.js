@@ -3,6 +3,7 @@ import { BadRequestException } from '../../common/exceptions/index.js';
 import path from 'path';
 import fs from 'fs';
 import dayjs from 'dayjs';
+import { sendMessage } from '../push-message.js';
 
 export const noticeCtrl = {
     async allGroupNoticeApp(req) {
@@ -63,13 +64,20 @@ export const noticeCtrl = {
         let parameter = {
             title, content, create_time, group_id
         }
-        parameter.notice_id = await noticeDao.createNotice(parameter).catch(e=>{
-            throw new BadRequestException(e)
+        // parameter.notice_id = await noticeDao.createNotice(parameter).catch(e=>{
+        //     throw new BadRequestException(e)
+        // })
+        // for(var i of req.files){
+        //     await noticeDao.insertFile(parameter, i).catch(e=>{
+        //         throw new BadRequestException(e)
+        //     })
+        // }
+        let tmp = await noticeDao.pushMessageDT(group_id).catch(e=>{
+            throw new BadRequestExceptionr(e)
         })
-        for(var i of req.files){
-            await noticeDao.insertFile(parameter, i).catch(e=>{
-                throw new BadRequestException(e)
-            })
+        for(var j of tmp){
+            console.log(j.device_token)
+            await sendMessage(j.device_token, parameter)
         }
         return '공지사항 추가를 완료했습니다.'
     }

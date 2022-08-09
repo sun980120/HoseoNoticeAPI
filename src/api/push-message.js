@@ -1,34 +1,33 @@
-
 import admin from "firebase-admin";
 
-import serviceAccount from "../hoseo-notice-firebase-adminsdk-oi7j5-c873f8a265.json"
+import serviceAccount from "../hoseo-notice-firebase-adminsdk-oi7j5-c873f8a265.json" assert {type: "json"};
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-exports.sendMessage = function (디바이스토큰값, 푸시메시지) {
-    return new Promise(function (resolve, reject) {
-        console.log(디바이스토큰값[0])
+export const sendMessage = (DeviceToken, pushMessage) => {
+    return new Promise((resolve, reject)=>{
+        console.log(DeviceToken)
         const message = {
             notification :{
-                title:푸시메시지.title,
-                body: 푸시메시지.content
+                title:pushMessage.title,
+                body: pushMessage.content
             },
         };
-        console.log(message);
-        admin.messaging().sendToDevice(디바이스토큰값,message).then((res) => {
+        admin.messaging().sendToDevice(DeviceToken, message).then((res) => {
             console.log(res)
             console.log('Successfully sent message: ', res)
-            resolve(res)
+            resolve(true)
         })
             .catch((error) => {
                 console.log(error)
                 console.log('Error sending message:', error)
-                reject(error)
+                reject('메세지 전송 실패')
             })
     })
 }
+
 
 // module.exports = {
 //   pushMessage: (디바이스토큰값, 푸시메시지) => {
