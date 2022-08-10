@@ -1,6 +1,6 @@
 import admin from "firebase-admin";
 
-import serviceAccount from "../hoseo-notice-firebase-adminsdk-oi7j5-c873f8a265.json" assert {type: "json"};
+import serviceAccount from "../smart-campus-5eccd-firebase-adminsdk-imzqm-d534319aa8.json" assert {type: "json"};
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
