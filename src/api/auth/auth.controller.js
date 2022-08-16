@@ -17,9 +17,9 @@ export const authCtrl = {
     },
     async AppPush(req, res, next) {
         let {active, device_token} = req.body;
-        let user = req.cookies.student;
+        let jwt_token = req.header('jwt_token');
 
-        const permission = await jwtMiddleware.jwtCerti(user)
+        const permission = await jwtMiddleware.jwtCerti(jwt_token)
 
         let parameters = {
             "push_active": active,
@@ -72,7 +72,6 @@ export const authCtrl = {
         const jwtToken = await jwtMiddleware.jwtCreateApp(userData).catch(e => {
             throw new BadRequestException(e)
         })
-        res.cookie("student", jwtToken);
         parameters.jwt_token = jwtToken;
 
         await authDAO.insertJWT(parameters).catch(e => {
@@ -127,7 +126,6 @@ export const authCtrl = {
         const jwtToken = await jwtMiddleware.jwtCreateApp(userData).catch(e => {
             throw new BadRequestException(e)
         });
-        res.cookie("student", jwtToken);
         parameters.jwt_token = jwtToken;
         await authDAO.insertJWT(parameters).catch(e => {
             throw new BadRequestException(e)

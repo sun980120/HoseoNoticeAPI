@@ -59,7 +59,6 @@ export const adminCtrl = {
         const jwtToken = await jwtMiddleware.jwtCreate(userData).catch(e => {
             throw new BadRequestException(e);
         });
-        res.cookie('admin', jwtToken);
         parameters.jwt_token = jwtToken;
         await authDAO.insertJWT(parameters).catch(e => {
             throw new BadRequestException(e);
@@ -68,6 +67,7 @@ export const adminCtrl = {
             'name': parameters.name,
             'phone': parameters.phone,
             'level': level,
+            'jwt_token' : jwtToken
         };
         return send_result;
     },
@@ -110,7 +110,6 @@ export const adminCtrl = {
                         'SCHYR': parameters.SCHYR,
                     };
                     const jwtToken = await jwtCreate(userData);
-                    res.cookie('admin', jwtToken);
                     parameters.jwt_token = jwtToken;
                     await authDAO.insertJWT(parameters);
                     res.json({

@@ -12,7 +12,7 @@ import {BadRequestException} from "../../common/exceptions/index.js";
 
 export const programCtrl = {
     async programAll(req, res) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token')
         let parameters = {}
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)
@@ -24,7 +24,7 @@ export const programCtrl = {
         return program_data
     },
     async programAllApp(req, res) {
-        let jwt_token = req.cookies.student;
+        let jwt_token = req.header('jwt_token')
         let parameters = {}
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)
@@ -50,7 +50,7 @@ export const programCtrl = {
         return sendData
     },
     async myprogramAll(req, res) {
-        let jwt_token = req.cookies.student;
+        let jwt_token = req.header('jwt_token')
         let parameters = {}
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)
@@ -62,7 +62,7 @@ export const programCtrl = {
         return program_data
     },
     async deleteUserProgram(req, res) {
-        let jwt_token = req.cookies.student;
+        let jwt_token = req.header('jwt_token')
         let parameters = {
             "program_id": req.body.program_id
         }
@@ -76,7 +76,7 @@ export const programCtrl = {
         return true
     },
     async deleteProgram(req, res) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token')
         let parameters = {
             "program_id": req.body.program_id
         }
@@ -123,7 +123,7 @@ export const programCtrl = {
     }
     ,
     async programUserAnswer(req, res) {
-        let jwt_token = req.cookies.student;
+        let jwt_token = req.header('jwt_token')
         let {program_id, accept} = req.body;
         let datetime = new dayjs().format('YYYY-MM-DD HH:mm:ss');
         let parameters = {

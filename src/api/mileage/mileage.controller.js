@@ -11,7 +11,7 @@ import {BadRequestException} from "../../common/exceptions/index.js";
 
 export const mileageCtrl = {
     async mymileageApp(req, res, next) {
-        let jwt_token = req.cookies.student;
+        let jwt_token = req.header('jwt_token')
         let parameters = {};
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)
@@ -23,7 +23,7 @@ export const mileageCtrl = {
         });
         return mileage_data
     }, async selectProgram(req, res, next) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token')
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)
         });
@@ -33,7 +33,7 @@ export const mileageCtrl = {
         });
         return program_data
     }, async detailProgramUser(req, res, next) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token')
         let parameters = {
             "program_id": req.body.program_id
         }
@@ -48,7 +48,7 @@ export const mileageCtrl = {
         })
         return program_answer_list
     }, async selectMileage(req, res, next) {
-        let jwt_token = req.cookies.student;
+        let jwt_token = req.header('jwt_token')
         let parameters = {}
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)
@@ -76,7 +76,7 @@ export const mileageCtrl = {
     }, async insertMileageUser(req, res, next) {
         let {program_id, target_user_id} = req.body
         let datetime = new dayjs().format('YYYY-MM-DD HH:mm:ss');
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token')
         let parameters = {
             "program_id": program_id, "mileage_date": datetime
         }
@@ -95,7 +95,7 @@ export const mileageCtrl = {
         })
         return "성공하였습니다."
     }, async SemesterMileage(req, res, next) {
-        let jwt_token = req.cookies.student
+        let jwt_token = req.header('jwt_token')
         let parameters = {}
         const permission = await jwtMiddleware.jwtCerti(jwt_token).catch(e => {
             throw new BadRequestException(e)

@@ -10,7 +10,7 @@ import {
 
 export const agreementCtrl = {
     async make_agreement(req, res, next) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token');
         let datetime = new dayjs().format('YYYY-MM-DD HH:mm:ss');
         let {content, version} = req.body;
         let parameters = {
