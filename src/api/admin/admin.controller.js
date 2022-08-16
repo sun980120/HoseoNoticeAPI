@@ -162,14 +162,14 @@ export const adminCtrl = {
         }
     },
     async adminList(req, res) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token');
         const permission = await jwtMiddleware.jwtCerti(jwt_token);
         if (permission.LEVEL != 0 && permission.LEVEL != 1) throw new BadRequestException('권한이 없습니다.');
         const adminList = await adminDAO.adminAll();
         return adminList;
     },
     async adminLevelUpdate(req, res) {
-        let jwt_token = req.cookies.admin;
+        let jwt_token = req.header('jwt_token');
         let { user_id, level } = req.body;
         let parameters = {
             'user_id': user_id,
@@ -177,9 +177,9 @@ export const adminCtrl = {
         };
         const permission = await jwtMiddleware.jwtCerti(jwt_token);
 
-        if (permission.LEVEL != 0 && permission.LEVEL != 1) throw '권한이 없습니다.';
+        if (permission.LEVEL != 0 && permission.LEVEL != 1) throw new BadRequestException('권한이 없습니다.');
 
-        if (permission.LEVEL >= level) throw '사용자 레벨보다 낮게 설정하세요.';
+        if (permission.LEVEL > level) throw new BadRequestException('사용자 레벨보다 낮게 설정하세요.');
 
         await adminDAO.adminLevelUpdate(parameters).catch(e => {
             throw new BadRequestException(e);

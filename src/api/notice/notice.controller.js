@@ -9,9 +9,11 @@ import { groupDao } from '../group/DAO/group.dao.js';
 
 export const noticeCtrl = {
     async allGroupNoticeApp(req) {
-        let parameter = {
-            'group_id': req.query.group_id
-        };
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token);
+        parameter.group_id = req.query.group_id;
+        await groupDao.adminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+
         const db_data = await noticeDao.allGroupNotice(parameter).catch(e => {
             throw new BadRequestException(e);
         });
@@ -30,9 +32,10 @@ export const noticeCtrl = {
         return result;
     },
     async detailNotice(req){
-        let parameter = {
-            'notice_id': req.query.notice_id
-        };
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token);
+        parameter.notice_id = req.query.notice_id;
+
         let result = await noticeDao.detailNotice(parameter).catch(e=>{
             throw new BadRequestException(e)
         })

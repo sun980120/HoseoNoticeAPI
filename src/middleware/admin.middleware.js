@@ -6,6 +6,7 @@ export const adminVerifyJWT = (req, res, next) => {
     if (jwtToken) {
         try {
             const decoded = jwtMiddleware.jwtVerify(jwtToken);
+            console.log(decoded)
             if (decoded.LEVEL !== 0 && decoded.LEVEL !== 1) throw "Err"
             next();
         } catch (err) {

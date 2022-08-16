@@ -47,6 +47,7 @@ export const groupDao = {
         });
     },
     adminGroupCheck(parameter) {
+        console.log(parameter)
         return new Promise((resolve, reject) => {
             const queryData = `SELECT *
                                FROM univ_group
@@ -57,6 +58,8 @@ export const groupDao = {
                     logger.error('DB error [univ_group]' + '\n \t' + queryData + '\n \t' + error);
                     reject('DB ERR');
                 }
+                if(db_data[0] == undefined) reject('그룹에 권한이 없습니다.')
+                console.log(db_data[0])
                 resolve(true);
             });
         });

@@ -18,12 +18,13 @@ export class NoticeRoutes {
         router
             // WEB
             .get('/all-web',adminVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp)) // 그룹의 모든 공지사항
+            .get('/detail-web', adminVerifyJWT, wrap(noticeCtrl.detailNotice))
             .get('/write', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.writeNotice))  // 그룹의 공지사항 작성
             .post('/edit', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.editNotice))   // 그룹의 공지사항 수정
             .delete('/delete', adminVerifyJWT, wrap(noticeCtrl.deleteNotice))   // 그룹의 공지사항 삭제
             // APP
             .get('/all-app', studentVerifyJWT, wrap(noticeCtrl.allGroupNoticeApp))  // 그룹의 모든 공지사항
-            .get('/detail', studentVerifyJWT, wrap(noticeCtrl.detailNotice))        // 그룹의 공지사항 상세보기
+            .get('/detail-app', studentVerifyJWT, wrap(noticeCtrl.detailNotice))        // 그룹의 공지사항 상세보기
         this.router.use(this.path, router);
     }
 }
