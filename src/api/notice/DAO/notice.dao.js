@@ -4,7 +4,7 @@ import logger from "../../../config/logger.js";
 export const noticeDao = {
     allGroupNotice(parameter){
         return new Promise((resolve, reject)=>{
-            const queryData = `SELECT * FROM notice WHERE group_id = ?`;
+            const queryData = `SELECT * FROM notice WHERE group_id = ? AND is_del = 'N'`;
             db.query(queryData, [parameter.group_id], (error, db_data)=>{
                 if (error) {
                     logger.error(
@@ -83,6 +83,21 @@ export const noticeDao = {
             })
         })
     },
+    editNotice(parameter){
+        return new Promise((resolve, reject)=>{
+            const queryData = `UPDATE notice SET title=?, content=?, create_time=? WHERE notice_id = ? AND group_id = ?`;
+            db.query(queryData, [parameter.title, parameter.content, parameter.create_time, parameter.notice_id, parameter.group_id], (error, db_data)=>{
+                if (error) {
+                    logger.error(
+                        "DB error [notice]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve('공지사항변경')
+            })
+        })
+    },
     insertFile(parameter, file) {
         return new Promise((resolve, reject)=>{
             const queryData = `INSERT INTO notice_file (notice_id, file_orgn_name, file_name, file_path, file_create_time) VALUES (?,?,?,?,?)`;
@@ -98,12 +113,42 @@ export const noticeDao = {
             })
         })
     },
+    deleteNotice(parameter){
+        return new Promise((resolve, reject)=>{
+            const queryData = `UPDATE notice SET is_del = 'Y' WHERE notice_id = ?, group_id = ?`;
+            db.query(queryData, [parameter.notice_id, parameter.group_id], (error, db_data)=>{
+                if (error) {
+                    logger.error(
+                        "DB error [notice]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve('공지사항 삭제 완료')
+            })
+        })
+    },
+    deletefile(parameter){
+      return new Promise((resolve, reject)=>{
+          const queryData = `DELETE FROM notice_file WHERE notice_id = ?`;
+          db.query(queryData, [parameter.notice_id], (error, db_data)=>{
+              if (error) {
+                  logger.error(
+                      "DB error [notice_file]" +
+                      "\n \t" + queryData +
+                      "\n \t" + error);
+                  reject('DB ERR');
+              }
+              resolve('공지사항 파일 삭제완료')
+          })
+      })
+    },
     pushMessageDT(group_id){
         return new Promise((resolve, reject)=>{
-            const queryData = `SELECT u.device_token 
+            const queryData = `SELECT u.device_token, ug.user_id
             FROM user AS u 
             RIGHT JOIN user_group AS ug ON u.user_id = ug.user_id
-            WHERE ug.group_id = ?`;
+            WHERE ug.group_id = ? AND u.push_active = '동의'`;
             db.query(queryData, [group_id], (error, db_data)=>{
                 if (error) {
                     logger.error(

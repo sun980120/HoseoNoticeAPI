@@ -14,7 +14,9 @@ export class PushRoutes {
     initializeRoutes() {
         const router = Router();
         router
-            .get('/my-push-log', studentVerifyJWT, wrap(pushController.getMyPushLog))
+            // WEB
+            // APP
+            .get('/my-push-log', studentVerifyJWT, wrap(pushController.getMyPushLog)) // 나의 알림 목록
         this.router.use(this.path, router);
     }
 }
