@@ -10,7 +10,7 @@ import { groupDao } from '../group/DAO/group.dao.js';
 export const noticeCtrl = {
     async allGroupNoticeApp(req) {
         let parameter = {
-            'group_id': req.body.group_id
+            'group_id': req.query.group_id
         };
         const db_data = await noticeDao.allGroupNotice(parameter).catch(e => {
             throw new BadRequestException(e);
