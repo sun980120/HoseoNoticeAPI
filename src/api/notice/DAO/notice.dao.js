@@ -54,8 +54,8 @@ export const noticeDao = {
     },
     detailNotice(parameter){
         return new Promise((resolve, reject)=>{
-            const queryData = `SELECT title, content, create_time FROM notice WHERE group_id = ? AND notice_id=?`;
-            db.query(queryData, [parameter.group_id, parameter.notice_id], (error, db_data)=>{
+            const queryData = `SELECT title, content, create_time FROM notice WHERE notice_id=?`;
+            db.query(queryData, [parameter.notice_id], (error, db_data)=>{
                 if (error) {
                     logger.error(
                         "DB error [notice]" +

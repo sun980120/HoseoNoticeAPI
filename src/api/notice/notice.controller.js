@@ -31,7 +31,6 @@ export const noticeCtrl = {
     },
     async detailNotice(req){
         let parameter = {
-            'group_id': req.body.group_id,
             'notice_id': req.query.notice_id
         };
         let result = await noticeDao.detailNotice(parameter).catch(e=>{
@@ -40,7 +39,6 @@ export const noticeCtrl = {
         let filename = await noticeDao.detailNoticeFile(parameter).catch(e=>{
             throw new BadRequestException(e)
         })
-        console.log(result)
         let file_name = []
         for(let i of filename){
             file_name.push(i.file_name)
