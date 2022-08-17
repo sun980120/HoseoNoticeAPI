@@ -10,7 +10,7 @@ import {
     NoticeRoutes,
     ProgramRoutes,
     QnaRoutes,
-    GroupRoutes, PushRoutes,
+    GroupRoutes, PushRoutes, SurveyRoutes
 } from '../api/index.js';
 
 async function startServer() {
@@ -26,6 +26,7 @@ async function startServer() {
         new QnaRoutes(),
         new GroupRoutes(),
         new PushRoutes(),
+        new SurveyRoutes(),
     ]);
     app.listen();
 }

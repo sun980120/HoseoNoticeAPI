@@ -12,7 +12,7 @@ export const noticeCtrl = {
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         parameter.group_id = req.query.group_id;
-        await groupDao.adminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        await groupDao.GroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
 
         const db_data = await noticeDao.allGroupNotice(parameter).catch(e => {
             throw new BadRequestException(e);
@@ -65,7 +65,7 @@ export const noticeCtrl = {
         parameter = {
             title, content, create_time, group_id
         }
-        await groupDao.adminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        await groupDao.GroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
         console.log('파일업로드를 완료했습니다.')
         parameter.notice_id = await noticeDao.createNotice(parameter).catch(e=>{
             throw new BadRequestException(e)
@@ -81,7 +81,7 @@ export const noticeCtrl = {
         parameter = {
             notice_id, title, content, create_time, group_id
         }
-        await groupDao.adminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        await groupDao.GroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
         console.log('파일업로드를 완료했습니다.')
         await noticeDao.deletefile(parameter).catch(e=>{
             throw new BadRequestException(e)
@@ -99,7 +99,7 @@ export const noticeCtrl = {
         parameter = {
             notice_id, group_id
         }
-        await groupDao.adminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        await groupDao.GroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
         await noticeDao.deletefile(parameter).catch(e=>{
             throw new BadRequestException(e)
         })
