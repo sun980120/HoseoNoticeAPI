@@ -9,7 +9,7 @@ export const sendAndPush = async(parameter, files) =>{
             throw new BadRequestException(e)
         })
     }
-    let deviceToken = await noticeDao.pushMessageDT(parameter.group_id).catch(e=>{
+    let deviceToken = await pushDao.pushMessageDT(parameter.group_id).catch(e=>{
         throw new BadRequestException(e)
     })
     let push_id = await pushDao.insertPushLog(parameter)

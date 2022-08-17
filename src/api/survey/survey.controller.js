@@ -4,7 +4,7 @@ import {surveyDao} from "./DAO/survey.dao.js";
 export const surveyCtrl = {
     async surveyDetail(req){
         let parameter = {
-            survey_id:req.params.survey_id
+            survey_id:req.query.survey_id
         };
         const db_data = await surveyDao.getSurvey(parameter)
         let result = []
@@ -17,6 +17,9 @@ export const surveyCtrl = {
         return result;
     },
     async addSurvey(req){
+
+    },
+    async allSurvey(req){
 
     }
 }
