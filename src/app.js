@@ -8,7 +8,6 @@ import cookieParser from 'cookie-parser';
 
 export default class App {
     app;
-
     constructor(routes) {
         this.app = express();
 

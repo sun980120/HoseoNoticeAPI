@@ -12,23 +12,52 @@ import {
     QnaRoutes,
     GroupRoutes, PushRoutes, SurveyRoutes
 } from '../api/index.js';
-
-async function startServer() {
-    // await createConnection(connection).catch(err=>{ console.log("Catched err", err);})
-    const app = new App([
-        new AdminRoutes(),
-        new AgreementRoutes(),
-        new AuthRoutes(),
-        new EventRoutes(),
-        new MileageRoutes(),
-        new NoticeRoutes(),
-        new ProgramRoutes(),
-        new QnaRoutes(),
-        new GroupRoutes(),
-        new PushRoutes(),
-        new SurveyRoutes(),
-    ]);
-    app.listen();
+import cluster from 'cluster';
+if(cluster.isMaster){ // 코어수에 맞게 fork 실행
+    cluster.fork()
+    cluster.fork()
+    cluster.fork()
+    cluster.fork()
+    cluster.fork()
+    cluster.fork()
+    cluster.fork()
+    cluster.fork()
+} else {
+    async function startServer() {
+        // await createConnection(connection).catch(err=>{ console.log("Catched err", err);})
+        const app = new App([
+            new AdminRoutes(),
+            new AgreementRoutes(),
+            new AuthRoutes(),
+            new EventRoutes(),
+            new MileageRoutes(),
+            new NoticeRoutes(),
+            new ProgramRoutes(),
+            new QnaRoutes(),
+            new GroupRoutes(),
+            new PushRoutes(),
+            new SurveyRoutes(),
+        ]);
+        app.listen();
+    }
+    startServer().catch((err) => console.log(err));
 }
 
-startServer().catch((err) => console.log(err));
+// async function startServer() {
+//     // await createConnection(connection).catch(err=>{ console.log("Catched err", err);})
+//     const app = new App([
+//         new AdminRoutes(),
+//         new AgreementRoutes(),
+//         new AuthRoutes(),
+//         new EventRoutes(),
+//         new MileageRoutes(),
+//         new NoticeRoutes(),
+//         new ProgramRoutes(),
+//         new QnaRoutes(),
+//         new GroupRoutes(),
+//         new PushRoutes(),
+//         new SurveyRoutes(),
+//     ]);
+//     app.listen();
+// }
+// startServer().catch((err) => console.log(err));
