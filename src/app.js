@@ -49,7 +49,7 @@ export default class App {
     initializeControllers(routes) {
         const router = Router();
 
-        router.get('/', (req, res) => res.send('Sever Is Running !!!'));
+        router.get('/', (req, res) => {res.send('Sever Is Running !!!')});
 
         routes.forEach((route) => {
             router.use(route.router);

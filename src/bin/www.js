@@ -1,5 +1,8 @@
 import App from '../app.js';
 import 'dotenv/config';
+import os from 'os';
+import cluster from 'cluster';
+const systemCpuCores = os.cpus().length;
 
 import {
     AdminRoutes,
@@ -12,16 +15,11 @@ import {
     QnaRoutes,
     GroupRoutes, PushRoutes, SurveyRoutes
 } from '../api/index.js';
-import cluster from 'cluster';
+
 if(cluster.isMaster){ // 코어수에 맞게 fork 실행
-    cluster.fork()
-    cluster.fork()
-    cluster.fork()
-    cluster.fork()
-    cluster.fork()
-    cluster.fork()
-    cluster.fork()
-    cluster.fork()
+    for (let i = 0; i < systemCpuCores; i++) {
+        cluster.fork();
+    }
 } else {
     async function startServer() {
         // await createConnection(connection).catch(err=>{ console.log("Catched err", err);})
