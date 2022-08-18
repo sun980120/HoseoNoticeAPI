@@ -1,0 +1,12 @@
+2022-07-06 16:34:50 [ERROR] - DB error [User]
+ 	SELECT * FROM SW_USER_1 WHERE ID='undefined'
+ 	Error: ER_NO_SUCH_TABLE: Table 'sw_user_1.sw_user_1' doesn't exist
+2022-07-06 16:38:03 [ERROR] - DB error [User]
+ 	SELECT * FROM SW_USER_1 WHERE ID='20171303'
+ 	Error: ER_NO_SUCH_TABLE: Table 'sw_user_1.sw_user_1' doesn't exist
+2022-07-06 16:41:39 [ERROR] - DB error [User]
+ 	SELECT * FROM SW_USER_1 WHERE ID='20171303'
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'ID' in 'where clause'
+2022-07-06 16:48:31 [ERROR] - DB error [User]
+ 	SELECT USER_ID, NM, M_PHONE, DEPT_NM, SCHYㄱR, ADDR, GRAD_YN FROM userAuth WHERE USER_ID = ? AND PASSWD = ?
+ 	Error: ER_BAD_FIELD_ERROR: Unknown column 'SCHYㄱR' in 'field list'
