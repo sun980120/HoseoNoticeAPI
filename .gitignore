@@ -7,5 +7,6 @@ yarn.lock
 package-lock.json
 src/public/uploads/
 smart-campus-5eccd-firebase-adminsdk-imzqm-d534319aa8.json
+log/
+.DS_Store
 .idea/
-.log/
