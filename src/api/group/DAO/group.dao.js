@@ -49,7 +49,7 @@ export const groupDao = {
     GroupCheck(parameter) {
         return new Promise((resolve, reject) => {
             const queryData = `SELECT *
-                               FROM univ_group
+                               FROM admin_group
                                WHERE user_id = ?
                                  AND group_id = ?`;
             db.query(queryData, [parameter.user_id, parameter.group_id], (error, db_data) => {
