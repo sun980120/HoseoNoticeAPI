@@ -4,7 +4,7 @@ import logger from "../../../config/logger.js";
 export const noticeDao = {
     allGroupNotice(parameter){
         return new Promise((resolve, reject)=>{
-            const queryData = `SELECT * FROM notice WHERE group_id = ? AND is_del = 'N'`;
+            const queryData = `SELECT * FROM notice WHERE group_id = ? AND is_del = 0`;
             db.query(queryData, [parameter.group_id], (error, db_data)=>{
                 if (error) {
                     logger.error(
