@@ -47,7 +47,16 @@ export const surveyCtrl = {
         return '설문조사 추가에 성공하였습니다.'
     },
     async allSurveyWeb(req) {
-
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token)
+        parameter.group_id = req.query.group_id;
+        try {
+            await groupDao.AdminGroupCheck(parameter)
+            const result = await surveyDao.allSurvey(parameter.group_id)
+            return result
+        } catch (e) {
+            throw new BadRequestException(e)
+        }
     },
     async allSurveyApp(req) {
         let jwt_token = req.header('jwt_token');
