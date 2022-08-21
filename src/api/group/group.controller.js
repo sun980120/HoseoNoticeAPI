@@ -60,8 +60,11 @@ export const groupController = {
         await groupDao.nameDuplicate(parameter).catch(e=>{
             throw new BadRequestException(e);
         })
-        const result =  await groupDao.createGroup(parameter).catch(e => {
+        const group_id =  await groupDao.createGroup(parameter).catch(e => {
             throw new BadRequestException(e);
+        })
+        const result = await groupDao.adminGroupUser(group_id, parameter.user_id).catch(e=>{
+            throw new BadRequestException(e)
         })
         return result
     }
