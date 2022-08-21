@@ -16,10 +16,12 @@ export class SurveyRoutes {
         router
             // WEB
             .post('/write', adminVerifyJWT, wrap(surveyCtrl.addSurvey))
-            .get('/all', adminVerifyJWT, wrap(surveyCtrl.allSurveyWeb))
+            .get('/all-web', adminVerifyJWT, wrap(surveyCtrl.allSurveyWeb))
             // APP
             .get('/all', studentVerifyJWT, wrap(surveyCtrl.allSurveyApp))
             .get('/detail-app', studentVerifyJWT, wrap(surveyCtrl.surveyDetail))
+            .get('/all-app', studentVerifyJWT, wrap(surveyCtrl.allSurveyApp))
+            .get('/detail', studentVerifyJWT, wrap(surveyCtrl.surveyDetail))
             // .post('/add-survey', studentVerifyJWT, wrap(surveyCtrl.addSurvey))
         this.router.use(this.path, router);
     }

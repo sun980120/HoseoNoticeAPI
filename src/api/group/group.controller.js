@@ -57,15 +57,13 @@ export const groupController = {
         parameter.group_name = group_name;
         parameter.group_image = group_image;
         parameter.intro = intro;
-        await groupDao.nameDuplicate(parameter).catch(e=>{
-            throw new BadRequestException(e);
-        })
-        const group_id =  await groupDao.createGroup(parameter).catch(e => {
-            throw new BadRequestException(e);
-        })
-        const result = await groupDao.adminGroupUser(group_id, parameter.user_id).catch(e=>{
+        try {
+            await groupDao.nameDuplicate(parameter)
+            const group_id =  await groupDao.createGroup(parameter)
+            const result = await groupDao.adminGroupUser(group_id, parameter.user_id)
+            return result;
+        } catch (e) {
             throw new BadRequestException(e)
-        })
-        return result
+        }
     }
 };
