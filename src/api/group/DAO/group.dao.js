@@ -35,14 +35,14 @@ export const groupDao = {
     },
     createGroup(parameter) {
         return new Promise((resolve, reject) => {
-            const queryData = `INSERT INTO univ_group (group_name, intro, group_image, user_id)
-                               VALUES (?, ?, ?, ?)`;
-            db.query(queryData, [parameter.group_name, parameter.intro, parameter.group_image, parameter.user_id], (error, db_data) => {
+            const queryData = `INSERT INTO univ_group (group_name, intro, group_image)
+                               VALUES (?, ?, ?)`;
+            db.query(queryData, [parameter.group_name, parameter.intro, parameter.group_image], (error, db_data) => {
                 if (error) {
                     logger.error('DB error [univ_group]' + '\n \t' + queryData + '\n \t' + error);
                     reject('DB ERR');
                 }
-                resolve(`'${parameter.group_name}' 그룹이 생성되었습니다.`);
+                resolve(db_data.insertId);
             });
         });
     },
@@ -61,5 +61,17 @@ export const groupDao = {
                 resolve(true);
             });
         });
+    },
+    adminGroupUser(group_id, user_id){
+        return new Promise((resolve, reject)=>{
+            const queryData = `INSERT INTO admin_group (user_id, group_id) VALUES (?,?)`;
+            db.query(queryData, [group_id, user_id], (error, db_data)=>{
+                if (error) {
+                    logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                resolve('그룹이 생성되었습니다.')
+            })
+        })
     }
 };
