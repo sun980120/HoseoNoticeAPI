@@ -46,7 +46,7 @@ export const groupDao = {
             });
         });
     },
-    GroupCheck(parameter) {
+    AdminGroupCheck(parameter) {
         return new Promise((resolve, reject) => {
             const queryData = `SELECT *
                                FROM admin_group
@@ -61,6 +61,19 @@ export const groupDao = {
                 resolve(true);
             });
         });
+    },
+    UserGroupCheck(parameter){
+        return new Promise((resolve, reject)=>{
+            const queryData = `SELECT * FROM user_group WHERE user_id = ? AND group_id = ?`;
+            db.query(queryData, [parameter.user_id, parameter.group_id], (error, db_data)=>{
+                if (error) {
+                    logger.error('DB error [user_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                if (db_data[0] == undefined) reject('그룹에 권한이 없습니다.')
+                resolve(true)
+            })
+        })
     },
     adminGroupUser(group_id, user_id){
         return new Promise((resolve, reject)=>{
