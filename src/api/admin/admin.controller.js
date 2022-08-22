@@ -27,11 +27,10 @@ export const adminCtrl = {
         parameters.phone = result.M_PHONE;
         parameters.department = result.DEPT_NM;
         parameters.addr = result.ADDR;
-
-        if (result.SCHYR != '') parameters.SCHYR = result.SCHYR;
+        if (result.SCHYR != null) parameters.SCHYR = result.SCHYR;
         else parameters.SCHYR = '교직원';
 
-        if (result.SCHYR != '') parameters.GRAD_YN = result.GRAD_YN;
+        if (result.SCHYR != null) parameters.GRAD_YN = result.GRAD_YN;
         else parameters.GRAD_YN = 'N';
 
         if (parameters.SCHYR != '교직원') throw new BadRequestException('학생은 접근할수 없습니다.');
