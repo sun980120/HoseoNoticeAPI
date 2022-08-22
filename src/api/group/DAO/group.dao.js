@@ -47,6 +47,7 @@ export const groupDao = {
         });
     },
     AdminGroupCheck(parameter) {
+        console.log(parameter)
         return new Promise((resolve, reject) => {
             const queryData = `SELECT *
                                FROM admin_group
@@ -57,6 +58,7 @@ export const groupDao = {
                     logger.error('DB error [univ_group]' + '\n \t' + queryData + '\n \t' + error);
                     reject('DB ERR');
                 }
+                console.log(db_data)
                 if (db_data[0] == undefined) reject('그룹에 권한이 없습니다.')
                 resolve(true);
             });
@@ -76,9 +78,11 @@ export const groupDao = {
         })
     },
     adminGroupUser(group_id, user_id){
+        console.log(group_id, user_id)
         return new Promise((resolve, reject)=>{
-            const queryData = `INSERT INTO admin_group (user_id, group_id) VALUES (?,?)`;
-            db.query(queryData, [group_id, user_id], (error, db_data)=>{
+            const queryData = `INSERT INTO admin_group (user_id, group_id) VALUE (?, ?)`;
+            db.query(queryData, [user_id, group_id], (error, db_data)=>{
+                console.log(db_data)
                 if (error) {
                     logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
                     reject('DB ERR');

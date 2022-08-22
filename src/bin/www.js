@@ -8,11 +8,7 @@ import {
     AdminRoutes,
     AgreementRoutes,
     AuthRoutes,
-    EventRoutes,
-    MileageRoutes,
     NoticeRoutes,
-    ProgramRoutes,
-    QnaRoutes,
     GroupRoutes, PushRoutes, SurveyRoutes
 } from '../api/index.js';
 
@@ -27,11 +23,7 @@ if(cluster.isMaster){ // 코어수에 맞게 fork 실행
             new AdminRoutes(),
             new AgreementRoutes(),
             new AuthRoutes(),
-            new EventRoutes(),
-            new MileageRoutes(),
             new NoticeRoutes(),
-            new ProgramRoutes(),
-            new QnaRoutes(),
             new GroupRoutes(),
             new PushRoutes(),
             new SurveyRoutes(),

@@ -10,8 +10,8 @@ export const sendMessage = (DeviceToken, pushMessage) => {
     return new Promise((resolve, reject)=>{
         const message = {
             notification :{
-                title:pushMessage.title,
-                body: pushMessage.content
+                title:pushMessage.push_title,
+                body: pushMessage.push_content
             },
         };
         admin.messaging().sendToDevice(DeviceToken, message).then((res) => {

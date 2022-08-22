@@ -115,7 +115,7 @@ export const noticeDao = {
     },
     deleteNotice(parameter){
         return new Promise((resolve, reject)=>{
-            const queryData = `UPDATE notice SET is_del = 'Y' WHERE notice_id = ?, group_id = ?`;
+            const queryData = `UPDATE notice SET is_del = 1 WHERE notice_id = ? AND group_id = ?`;
             db.query(queryData, [parameter.notice_id, parameter.group_id], (error, db_data)=>{
                 if (error) {
                     logger.error(

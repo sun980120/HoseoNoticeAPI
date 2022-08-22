@@ -24,12 +24,13 @@ export const pushCtrl = {
         parameter.push_date = push_date;
         parameter.push_title = push_title;
         parameter.push_content = push_content;
-        await groupDao.adminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        await groupDao.AdminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
         let deviceToken = await pushDao.pushMessageDT(parameter.group_id).catch(e=>{
             throw new BadRequestException(e)
         })
         let push_id = await pushDao.insertPushLog(parameter)
         for(let j of deviceToken){
+
             await sendMessage(j.device_token, parameter).catch(e=>{throw new BadRequestException(e)})
             await pushDao.insertPushUser(j.user_id, push_id).catch(e=>{throw new BadRequestException(e)})
         }

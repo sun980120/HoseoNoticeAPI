@@ -4,10 +4,12 @@ import { sendMessage } from '../push-message.js';
 import { pushDao } from '../push/DAO/push.dao.js';
 
 export const sendAndPush = async(parameter, files) =>{
-    for(let i of files){
-        await noticeDao.insertFile(parameter, i).catch(e=>{
-            throw new BadRequestException(e)
-        })
+    if(files){
+        for(let i of files){
+            await noticeDao.insertFile(parameter, i).catch(e=>{
+                throw new BadRequestException(e)
+            })
+        }
     }
     let deviceToken = await pushDao.pushMessageDT(parameter.group_id).catch(e=>{
         throw new BadRequestException(e)
