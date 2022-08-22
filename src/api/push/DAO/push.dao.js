@@ -21,9 +21,10 @@ export const pushDao = {
         })
     },
     insertPushLog(parameter) {
+        console.log(parameter)
         return new Promise((resolve, reject)=>{
             const queryData = `INSERT INTO push_log (group_id, push_title, push_content, push_date) VALUE (?,?,?,?)`;
-            db.query(queryData, [parameter.group_id, parameter.title, parameter.content, parameter.create_time], (error, db_data)=>{
+            db.query(queryData, [parameter.group_id, parameter.push_title, parameter.push_content, parameter.push_date], (error, db_data)=>{
                 if (error) {
                     logger.error(
                         "DB error [push_log]" +
