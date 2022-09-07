@@ -117,5 +117,37 @@ export const surveyDao = {
                 resolve(db_data)
             })
         })
-    }
+    },
+    insertAnswer(parameter){
+        console.log('123123')
+        console.log(parameter)
+        return new Promise((resolve, reject) => {
+            const queryData =`INSERT INTO answer (survey_id, user_id, create_time) VALUE (?,?,?)`;
+            db.query(queryData, [parameter.survey_id, parameter.user_id, parameter.create_time], (error, db_data)=>{
+                if (error) {
+                    logger.error(
+                        "DB error [answer]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve(db_data.insertId)
+            })
+        })
+    },
+    insertSurveyAnswer(answer_id, parameter){
+        return new Promise((resolve, reject) => {
+            const queryData = `INSERT INTO survey_answer (survey_question_id, answer_id, answer) VALUE (?,?,?)`;
+            db.query(queryData, [parameter.survey_question_id, answer_id, parameter.answer], (error, db_data)=>{
+                if (error) {
+                    logger.error(
+                        "DB error [survey_answer]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve('추가성공 !!!')
+            })
+        })
+    },
 }

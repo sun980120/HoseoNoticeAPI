@@ -31,6 +31,7 @@ export const noticeCtrl = {
             result.push({
                 notice_id: i.notice_id,
                 title: i.title,
+                name: i.user_id,
                 create_time: i.create_time,
                 file_count: file_count // 파일의 갯수
             });
@@ -41,6 +42,12 @@ export const noticeCtrl = {
         let jwt_token = req.header('jwt_token');
         let parameter = await resultJwt(jwt_token);
         parameter.notice_id = req.query.notice_id;
+
+        // if(req.path == '/detail-web'){
+        //     await groupDao.AdminGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        // } else {
+        //     await groupDao.UserGroupCheck(parameter).catch(e=>{throw new BadRequestException(e)})
+        // }
 
         let result = await noticeDao.detailNotice(parameter).catch(e=>{
             throw new BadRequestException(e)

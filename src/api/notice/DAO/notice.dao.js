@@ -4,7 +4,8 @@ import logger from "../../../config/logger.js";
 export const noticeDao = {
     allGroupNotice(parameter){
         return new Promise((resolve, reject)=>{
-            const queryData = `SELECT * FROM notice WHERE group_id = ? AND is_del = 0`;
+            // const queryData = `SELECT * FROM notice WHERE group_id = ? AND is_del = 0`;
+            const queryData = `SELECT n.*, ag.user_id FROM admin_group AS ag RIGHT JOIN notice n on ag.group_id = n.group_id WHERE n.group_id = ? AND n.is_del=0;`
             db.query(queryData, [parameter.group_id], (error, db_data)=>{
                 if (error) {
                     logger.error(

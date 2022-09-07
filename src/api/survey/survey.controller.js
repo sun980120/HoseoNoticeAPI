@@ -14,7 +14,7 @@ export const surveyCtrl = {
         for (const i of db_data) {
             let choice_content_data = await surveyDao.getChoiceContent(i.question_type_id)
             let choice_content = []
-            for(const j of choice_content_data){
+            for (const j of choice_content_data) {
                 choice_content.push(j.choice_content)
             }
             result.push({
@@ -67,6 +67,26 @@ export const surveyCtrl = {
             const result = await surveyDao.allSurvey(parameter.group_id)
             return result
         } catch (e) {
+            throw new BadRequestException(e)
+        }
+    },
+    async useraddSurvey(req) {
+        const { survey_id, question_data } = req.body;
+        const create_time = dayjs().format('YYYY-MM-DD hh:mm:ss');
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token)
+        parameter.survey_id = survey_id
+        parameter.create_time = create_time
+        try {
+            const answer_id = await surveyDao.insertAnswer(parameter)
+            console.log(answer_id)
+            for (let i of question_data) {
+                console.log(i)
+                await surveyDao.insertSurveyAnswer(answer_id, i)
+            }
+            return '설문조사 완료' 
+        } catch (e) {
+            console.log(e)
             throw new BadRequestException(e)
         }
     }

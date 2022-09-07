@@ -1,5 +1,5 @@
 {
-  "name": "oview",
+  "name": "hoseonotice",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -44,6 +44,8 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.10"
+    "@babel/cli": "^7.18.10",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
   }
 }

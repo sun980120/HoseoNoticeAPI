@@ -22,7 +22,7 @@ export class SurveyRoutes {
             .get('/detail-app', studentVerifyJWT, wrap(surveyCtrl.surveyDetail))
             .get('/all-app', studentVerifyJWT, wrap(surveyCtrl.allSurveyApp))
             .get('/detail', studentVerifyJWT, wrap(surveyCtrl.surveyDetail))
-            // .post('/add-survey', studentVerifyJWT, wrap(surveyCtrl.addSurvey))
+            .post('/questionnaire', studentVerifyJWT, wrap(surveyCtrl.useraddSurvey))
         this.router.use(this.path, router);
     }
 }
