@@ -4,7 +4,7 @@ import logger from "../../../config/logger.js";
 export const surveyDao = {
     getSurvey(parameter) {
         return new Promise((resolve, reject) => {
-            const queryData = `SELECT sq.question, qt.type_name, qt.question_type_id 
+            const queryData = `SELECT sq.survey_question_id, sq.question, qt.type_name, qt.question_type_id 
             FROM survey AS s JOIN survey_question AS sq ON s.survey_id = sq.survey_id 
             JOIN question_type AS qt ON sq.question_type_id = qt.question_type_id WHERE s.survey_id = ?;`;
             db.query(queryData, [parameter.survey_id], (error, db_data) => {
