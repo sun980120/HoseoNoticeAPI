@@ -18,6 +18,7 @@ export const surveyCtrl = {
                 choice_content.push(j.choice_content)
             }
             result.push({
+                survey_question_id: i.survey_question_id,
                 question: i.question,
                 type_name: i.type_name,
                 choice_content: choice_content
