@@ -19,7 +19,7 @@ export class NoticeRoutes {
             // WEB
             .get('/all-web',adminVerifyJWT, wrap(noticeCtrl.allGroupNotice)) // 그룹의 모든 공지사항
             .get('/detail-web', adminVerifyJWT, wrap(noticeCtrl.detailNotice))  // 그룹의 공지사항 상세보기
-            .get('/write', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.writeNotice))  // 그룹의 공지사항 작성
+            .post('/write', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.writeNotice))  // 그룹의 공지사항 작성
             .post('/edit', adminVerifyJWT, uploads.array('img'), wrap(noticeCtrl.editNotice))   // 그룹의 공지사항 수정
             .delete('/delete', adminVerifyJWT, wrap(noticeCtrl.deleteNotice))   // 그룹의 공지사항 삭제
             // APP
