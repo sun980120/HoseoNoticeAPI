@@ -51,7 +51,7 @@ export const groupDao = {
             const queryData = `SELECT *
                                FROM admin_group
                                WHERE user_id = ?
-                                 AND group_id = ?`;
+                                 AND group_id = ? AND is_approved = 1`;
             db.query(queryData, [parameter.user_id, parameter.group_id], (error, db_data) => {
                 if (error) {
                     logger.error('DB error [univ_group]' + '\n \t' + queryData + '\n \t' + error);

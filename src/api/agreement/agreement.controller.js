@@ -18,9 +18,6 @@ export const agreementCtrl = {
             "agreement_id": version,
             "content": escape(content),
         }
-        const permission = await jwtMiddleware.jwtCerti(jwt_token);
-
-        if (permission.LEVEL != 0 && permission.LEVEL != 1) throw new BadRequestException("권한이 없습니다.")
         await agreementDAO.agreementInsert(parameters).catch(e => {
             throw new BadRequestException(e)
         });
