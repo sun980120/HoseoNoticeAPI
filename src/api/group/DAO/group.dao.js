@@ -1,6 +1,5 @@
 import logger from '../../../config/logger.js';
 import db from '../../../config/db.js';
-import { error } from 'winston';
 
 export const groupDao = {
     allGroup() {
