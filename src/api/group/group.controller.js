@@ -65,5 +65,17 @@ export const groupController = {
         } catch (e) {
             throw new BadRequestException(e)
         }
+    },
+    async adminGroupCall(req){
+        const { group_id } = req.body;
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token);
+        parameter.group_id = group_id;
+        try {
+            await groupDao.duplicateGroup(parameter)
+            return await groupDao.adminGroupCall(parameter)
+        } catch (e) {
+            throw new BadRequestException(e)
+        }
     }
 };

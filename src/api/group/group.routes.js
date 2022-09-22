@@ -16,12 +16,13 @@ export class GroupRoutes {
         const router = Router();
         router
             // Web
-            .get('/all-group-web', adminVerifyJWT, wrap(groupCtrl.allGroupList))                // 모든 그룹 목록
+            .get('/all-group-web', adminVerifyJWT, wrap(groupCtrl.allGroupList))            // 모든 그룹 목록
             .get('/admin-group-list', adminVerifyJWT, wrap(groupCtrl.getMyGroup))           // 관리자 그룹 목록
             .post('/create-group', adminVerifyJWT, wrap(groupCtrl.createGroup))             // 관리자 그룹 새성
+            .post('/admin-group-call', adminVerifyJWT, wrap(groupCtrl.adminGroupCall))      // 관리자 그룹 신규 요청
             // App
-            .get('/all-group-app', studentVerifyJWT, wrap(groupCtrl.allGroupList))         // 모든 그룹 목록
-            .get('/user-group-list', studentVerifyJWT, wrap(groupCtrl.getMyGroup))            // 사용자 그룹 목록
+            .get('/all-group-app', studentVerifyJWT, wrap(groupCtrl.allGroupList))          // 모든 그룹 목록
+            .get('/user-group-list', studentVerifyJWT, wrap(groupCtrl.getMyGroup))          // 사용자 그룹 목록
             .post('/add-group', studentVerifyJWT, wrap(groupCtrl.addGroup))                 // 사용자 그룹 추가
             .delete('/delete-my-group', studentVerifyJWT, wrap(groupCtrl.deleteMyGroup))    // 사용자 그룹 제거
 

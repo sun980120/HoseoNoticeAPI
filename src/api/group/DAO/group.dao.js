@@ -1,5 +1,6 @@
 import logger from '../../../config/logger.js';
 import db from '../../../config/db.js';
+import { error } from 'winston';
 
 export const groupDao = {
     allGroup() {
@@ -76,16 +77,40 @@ export const groupDao = {
         })
     },
     adminGroupUser(group_id, user_id){
-        console.log(group_id, user_id)
         return new Promise((resolve, reject)=>{
-            const queryData = `INSERT INTO admin_group (user_id, group_id) VALUE (?, ?)`;
-            db.query(queryData, [user_id, group_id], (error, db_data)=>{
+            const queryData = `INSERT INTO admin_group (user_id, group_id, is_approved) VALUE (?, ?, ?)`;
+            db.query(queryData, [user_id, group_id, 1], (error, db_data)=>{
                 console.log(db_data)
                 if (error) {
                     logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
                     reject('DB ERR');
                 }
                 resolve('그룹이 생성되었습니다.')
+            })
+        })
+    },
+    adminGroupCall(parameter){
+        return new Promise((resolve, reject) => {
+            const queryData = `INSERT INTO admin_group (user_id, group_id) VALUE(?, ?)`;
+            db.query(queryData, [parameter.user_id, parameter.group_id], (error, db_data)=>{
+                if (error) {
+                    logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                resolve('그룹에 신규 요청을 하였습니다.')
+            })
+        })
+    },
+    duplicateGroup(parameter){
+        return new Promise((resolve, reject) => {
+            const queryData = `SELECT COUNT(*) AS cnt FROM admin_group WHERE user_id = ? AND group_id = ?`;
+            db.query(queryData, [parameter.user_id, parameter.group_id], (error, db_data) => {
+                if (error) {
+                    logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                if(db_data[0].cnt == 0) resolve(true)
+                reject('이미 신청하였습니다.')
             })
         })
     }
