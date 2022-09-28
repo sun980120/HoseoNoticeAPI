@@ -20,6 +20,8 @@ export class GroupRoutes {
             .get('/admin-group-list', adminVerifyJWT, wrap(groupCtrl.getMyGroup))           // 관리자 그룹 목록
             .post('/create-group', adminVerifyJWT, wrap(groupCtrl.createGroup))             // 관리자 그룹 새성
             .post('/admin-group-call', adminVerifyJWT, wrap(groupCtrl.adminGroupCall))      // 관리자 그룹 신규 요청
+            .get('/admin-group-call-list', adminVerifyJWT, wrap(groupCtrl.adminGroupCallList))  // 관리자 그룹 신청 리스트
+            .put('/admin-group-accept', adminVerifyJWT, wrap(groupCtrl.adminGroupAccept))  // 관리자 그룹 권한 부여
             // App
             .get('/all-group-app', studentVerifyJWT, wrap(groupCtrl.allGroupList))          // 모든 그룹 목록
             .get('/user-group-list', studentVerifyJWT, wrap(groupCtrl.getMyGroup))          // 사용자 그룹 목록

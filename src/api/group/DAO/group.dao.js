@@ -112,5 +112,29 @@ export const groupDao = {
                 reject('이미 신청하였습니다.')
             })
         })
+    },
+    adminGroupCallList(){
+        return new Promise((resolve, reject) => {
+            const queryData = `SELECT ag.admin_group_id as admin_group_id, ag.user_id AS user_id, ug.group_name AS group_name FROM admin_group AS ag RIGHT JOIN univ_group ug ON ag.group_id = ug.group_id WHERE ag.is_approved = ?;`;
+            db.query(queryData, [0], (error, db_data) => {
+                if (error) {
+                    logger.error('DB error [admin_group & univ_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                resolve(db_data)
+            })
+        })
+    },
+    adminGroupAccept(admin_group_id){
+        return new Promise((resolve, reject) => {
+            const queryData = `UPDATE admin_group SET is_approved = ? WHERE admin_group_id =?;`;
+            db.query(queryData, [1, admin_group_id], (error, db_data) => {
+                if (error) {
+                    logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                resolve('권한 부여에 성공하였습니다.')
+            })
+        })
     }
 };
