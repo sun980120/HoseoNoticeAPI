@@ -136,5 +136,29 @@ export const groupDao = {
                 resolve('권한 부여에 성공하였습니다.')
             })
         })
+    },
+    deleteGroup(group_id){
+        return new Promise((resolve, reject) => {
+            const queryData = `DELETE FROM univ_group WHERE group_id = ?;`;
+            db.query(queryData, [group_id], (error, db_data) => {
+                if(error){
+                    logger.error('DB error [univ_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                resolve('그룹을 삭제하였습니다.')
+            })
+        })
+    },
+    adminGroupDelete(parameter) {
+        return new Promise((resolve, reject) => {
+            const queryData = `DELETE FROM admin_group WHERE group_id = ? AND user_id = ?`;
+            db.query(queryData, [parameter.group_id, parameter.user_id], (error, db_data) => {
+                if(error){
+                    logger.error('DB error [admin_group]' + '\n \t' + queryData + '\n \t' + error);
+                    reject('DB ERR');
+                }
+                resolve('그룹에 탈퇴하였습니다.')
+            })
+        })
     }
 };

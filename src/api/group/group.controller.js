@@ -139,7 +139,7 @@ export const groupController = {
         }
     },
     /**
-     * 관리자 구릅 신청 리스트
+     * 관리자 그릅 신청 리스트
      * @header {jwt_token} req.header
      * @returns 
      */
@@ -150,6 +150,34 @@ export const groupController = {
             if(parameter.user_level !==0 ) throw "최고 관리자만 접근 가능합니다."
             const result = await groupDao.adminGroupCallList()
             return result
+        } catch (e) {
+            throw new BadRequestException(e)
+        }
+    },
+    /**
+     * 그룹 삭제
+     * @header {jwt_token} req.header
+     * @body {group_id} req.body
+     * @returns 
+     */
+    async deleteGroup(req){
+        let jwt_token = req.header('jwt_token');
+        const { group_id } = req.body;
+        let parameter = await resultJwt(jwt_token);
+        try {
+            if(parameter.user_level !== 0) throw "최고 관리자만 접근 가능합니다.";
+            return await groupDao.deleteGroup(group_id);
+        } catch (e) {
+            throw new BadRequestException(e)
+        }
+    },
+    async adminGroupDelete(req){
+        let jwt_token = req.header('jwt_token');
+        let parameter = await resultJwt(jwt_token)
+        parameter.group_id = req.body.group_id;
+        try {
+            await groupDao.AdminGroupCheck(parameter)
+            return await groupDao.adminGroupDelete(parameter)
         } catch (e) {
             throw new BadRequestException(e)
         }
