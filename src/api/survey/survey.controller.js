@@ -95,5 +95,19 @@ export const surveyCtrl = {
             console.log(e)
             throw new BadRequestException(e)
         }
+    },
+    async resultList(req){
+        const { survey_id, group_id } = req.body;
+        let jwt_token = req.header('jwt_token')
+        let parameter = await resultJwt(jwt_token)
+        parameter.survey_id = survey_id;
+        parameter.group_id = group_id;
+        try {
+            await groupDao.AdminGroupCheck(parameter)
+            return await surveyDao.resultList(parameter)
+        } catch (e) {
+            console.log(e)
+            throw new BadRequestException(e)
+        }
     }
 }

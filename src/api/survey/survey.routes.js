@@ -17,6 +17,7 @@ export class SurveyRoutes {
             // WEB
             .post('/write', adminVerifyJWT, wrap(surveyCtrl.addSurvey))
             .get('/all-web', adminVerifyJWT, wrap(surveyCtrl.allSurveyWeb))
+            .get('/result_list', adminVerifyJWT, wrap(surveyCtrl.resultList))
             // APP
             .get('/all', studentVerifyJWT, wrap(surveyCtrl.allSurveyApp))
             .get('/detail-app', studentVerifyJWT, wrap(surveyCtrl.surveyDetail))

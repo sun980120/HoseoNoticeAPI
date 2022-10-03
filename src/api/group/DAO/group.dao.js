@@ -47,6 +47,7 @@ export const groupDao = {
         });
     },
     AdminGroupCheck(parameter) {
+        console.log(parameter)
         return new Promise((resolve, reject) => {
             const queryData = `SELECT *
                                FROM admin_group

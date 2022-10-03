@@ -150,4 +150,19 @@ export const surveyDao = {
             })
         })
     },
+    resultList(parameter) {
+        return new Promise((resolve, reject) => {
+            const queryData = `SELECT answer_id, user_id FROM answer AS a RIGHT JOIN survey AS s ON a.survey_id = s.survey_id WHERE s.survey_id = ?;`;
+            db.query(queryData, [parameter.survey_id], (error, db_data)=> {
+                if(error){
+                    logger.error(
+                        "DB error [answer & survey]" +
+                        "\n \t" + queryData +
+                        "\n \t" + error);
+                    reject('DB ERR');
+                }
+                resolve(db_data)
+            })
+        })
+    }
 }
