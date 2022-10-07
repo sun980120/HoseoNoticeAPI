@@ -1,6 +1,8 @@
 # HoseoNoticeAPI
 
+## Version : 1
+
 ## 호서대 캡스톤
 
 ### Developer
-> Server : 홍우성
+> 홍우성
